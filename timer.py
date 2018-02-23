@@ -3,10 +3,11 @@ import time
 def timer_v1(func):
     def wrapper(*args):
         tic = time.time()
-        func(*args)
+        result_of_func = func(*args)
         toc = time.time()
         print('--- The function: {} -- {} seconds ---'.format(
               func.__name__, toc-tic))
+        return result_of_func
     return wrapper
 
 def timer_v2(t_max):
@@ -14,7 +15,7 @@ def timer_v2(t_max):
     def decorator(func):
         def wrapper(*args):
             tic = time.time()
-            func(*args)
+            result_of_func = func(*args)
             toc = time.time()
             t = toc - tic
             if t-t_max/100 > 0.0001:
@@ -23,6 +24,7 @@ def timer_v2(t_max):
             else:
                 print('--- The function: {} -- {} seconds ---'.format(
                       func.__name__, t))
+            return result_of_func
         return wrapper
     return decorator
 
